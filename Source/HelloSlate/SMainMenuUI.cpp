@@ -1,15 +1,21 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "SMainMenuUI.h"
 #include "SlateOptMacros.h"
+#include "Widgets/SOverlay.h"
 #include "Widgets/Text/STextBlock.h"
-#include <Widgets/Input/SButton.h>
-#include <Internationalization/Text.h>
-#include <Widgets/SBoxPanel.h>
+#include "Widgets/Input/SButton.h"
+#include "Internationalization/Text.h"
+#include "Widgets/SBoxPanel.h"
 #include "MenuStyles.h"
 
+
+#define LOCTEXT_NAMESPACE "MainMenu"
+
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
+
+
 void SMainMenuUI::Construct(const FArguments& InArgs)
 {
 
@@ -26,7 +32,7 @@ void SMainMenuUI::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.TextStyle(&MenuStyle->MenuTitleStyle)
-				.Text(FText::FromString("Main Menu"))
+				.Text(LOCTEXT("MainMenuText","Main Menu"))
 			]
 
 			+SOverlay::Slot()
@@ -39,7 +45,7 @@ void SMainMenuUI::Construct(const FArguments& InArgs)
 					SNew(SButton)
 					.ButtonStyle(&MenuStyle->MenuButtonStyle)
 					.TextStyle(&MenuStyle->MenuButtonTextStyle)
-					.Text(FText::FromString("Play Game!"))
+					.Text(LOCTEXT("PlayGameText","Play Game!"))
 					.OnClicked(this,&SMainMenuUI::PlayGameClicked)
 				]
 				+ SVerticalBox::Slot()
@@ -47,12 +53,13 @@ void SMainMenuUI::Construct(const FArguments& InArgs)
 					SNew(SButton)
 					.ButtonStyle(&MenuStyle->MenuButtonStyle)
 					.TextStyle(&MenuStyle->MenuButtonTextStyle)
-					.Text(FText::FromString("Quit Game!"))
+					.Text(LOCTEXT("QuitGameText","Quit Game!"))
 					.OnClicked(this, &SMainMenuUI::QuitGameClicked)
 				]
 			]
 	];
 }
+
 
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
@@ -81,3 +88,4 @@ FReply SMainMenuUI::QuitGameClicked()
 	return FReply::Handled();
 }
 
+#undef LOCTEXT_NAMESPACE
